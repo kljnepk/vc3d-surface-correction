@@ -26,6 +26,13 @@ Compared with VC3D, R103 gained **57.18 voxel² per start on average (+10.7%)**.
 
 In the two-direction extension of region `01744_02256_04816`, start 0, the R103 centreline measured 124.4 voxels. Of 62 intervals along this strip, 55 met the annotation-overlap rule with VC3D and 62 with R103. This is a second look at one of the 28 starts.
 
+### Inspect a candidate fiber in three CT sections
+
+Two texture traces from the registered R103 panel were selected by uninterrupted image contrast across all 28 corrected surface renders. Their 3D lengths were 45.5 and 39.0 voxels. One occurred in a strip that lost target-sheet area and one in a strip that gained it. The reference annotations identify individual sheets. The texture traces are candidate fibers.
+
+[Generate the linked surface views and CT sections locally](r103-trace-sections.py). Obtain the official volume and mask NRRDs for `01744_02512_04048` and `10192_04048_03280` as described in the [reproduction instructions](docs/REPRODUCE.md). From the repository root run `python3 r103-trace-sections.py --data-dir input --out my-trace-sections.html`, then open the HTML in a browser. At A, B and C, each 20 × 20 voxel scan section passes through the highlighted position on the R103 surface. You can switch the sheet-annotation outlines on and off.
+
+
 ### Inspect two CT examples from the published benchmark
 
 Both examples use the original PHerc. Paris. 4 meshes. The left-hand example gained 227.50 voxel² of target-sheet area. The right-hand example lost 56.00 voxel², the largest loss on this panel. Other-sheet area was zero for both methods in these two starts. The scores come from the sheet annotations. The grayscale panels show the CT sampled by the meshes.
