@@ -26,6 +26,21 @@ Compared with VC3D, R103 gained **57.18 voxel² per start on average (+10.7%)**.
 
 In the two-direction extension of region `01744_02256_04816`, start 0, the R103 centreline measured 124.4 voxels. Of 62 intervals along this strip, 55 met the annotation-overlap rule with VC3D and 62 with R103. This is a second look at one of the 28 starts.
 
+### Inspect two CT examples from the published benchmark
+
+Both examples use the original PHerc. Paris. 4 meshes. The left-hand example gained 227.50 voxel² of target-sheet area. The right-hand example lost 56.00 voxel², the largest loss on this panel. Other-sheet area was zero for both methods in these two starts. The scores come from the sheet annotations. The grayscale panels show the CT sampled by the meshes.
+
+![CT sampled along each surface and a longitudinal section through both meshes, for a gain and a loss](r103-before-after.png)
+
+The animation rotates the original meshes from the increased-area example at the same voxel scale. Cyan shows VC3D and orange shows R103.
+
+![A rotating overlay of the VC3D and R103 surface meshes for region 01744_02256_04816, start 0](r103-rotation.gif)
+
+[Download the interactive 3D and CT viewer](r103-3d.html). On GitHub, choose **Download raw file**, then open the HTML in a browser. Drag to rotate the meshes, toggle either surface or switch to the loss case. The gain case includes five transverse CT sections and a mesh-line toggle for inspecting the underlying material.
+
+CT from EduceLab-Scrolls, EduceLab / University of Kentucky. Volumetric instance labels and VC3D from the Vesuvius Challenge. [Parsons et al. (2023)](https://doi.org/10.48550/arXiv.2304.02084).
+
+
 ## How it works
 
 Five longitudinal tracks estimate local shifts from CT profiles. The algorithm smooths these shifts across the width of the strip and joins compatible left and right halves. Four interleaved tracks assess the CT fit and decide between that surface and the uniform correction. Both candidates have the same starting edge. The correction requires no training or sheet mask at inference. The benchmark used annotated locations to place its starting windows.
