@@ -59,3 +59,4 @@ Five longitudinal tracks estimate local shifts from CT profiles. The algorithm s
 Data were obtained from **EduceLab-Scrolls**, EduceLab / University of Kentucky. The Vesuvius Challenge provides the volumetric instance labels and VC3D. Obtain the scans from the official source under its data terms.
 
 [Parsons et al. (2023), *EduceLab-Scrolls*](https://doi.org/10.48550/arXiv.2304.02084) · [PHerc. Paris. 4](https://scrollprize.org/data_browser/PHercParis4) · [Data terms](https://dl.ash2txt.org/LICENSE.txt) · [VC3D software](https://github.com/ScrollPrize/villa)
+[External fibre validation on PHerc. 172 and PHerc. 332](r103-external-fibres.md)
