@@ -1,7 +1,7 @@
 {
   "appimage_sha256": "27fefb358f2489260c47c1ea98b57cdfd6b52d54513178356b5ff767b72df003",
   "cache": "NONE",
-  "case_selection": "Five fixed illustrative cases, not a new independent benchmark",
+  "case_selection": "Five fixed P01/P03 illustrative cases, not a new independent benchmark",
   "cases": [
     {
       "arms": {
@@ -9,7 +9,7 @@
           "exact": true,
           "expected_longest": 29,
           "longest": 29,
-          "max_coordinate_difference_vox": 0,
+          "max_coordinate_difference_vox": 0.0,
           "sha256": "48890a2aa4f86fa7bce121c7f09dfbb15e5ff4925667628510a94e0b9ffca614",
           "shape": [
             33,
@@ -21,7 +21,7 @@
           "exact": true,
           "expected_longest": 4,
           "longest": 4,
-          "max_coordinate_difference_vox": 0,
+          "max_coordinate_difference_vox": 0.0,
           "sha256": "34fd1ac46df24f4ddea1f201480248a148cc3e6caa5557cc14c4c3812b1f6e53",
           "shape": [
             33,
@@ -41,7 +41,7 @@
           "exact": true,
           "expected_longest": 1,
           "longest": 1,
-          "max_coordinate_difference_vox": 0,
+          "max_coordinate_difference_vox": 0.0,
           "sha256": "ba736b6d67ee00b2479ce3edbf25b83c305a4fbd41c6a4954701f857f805c09d",
           "shape": [
             33,
@@ -53,7 +53,7 @@
           "exact": true,
           "expected_longest": 7,
           "longest": 7,
-          "max_coordinate_difference_vox": 0,
+          "max_coordinate_difference_vox": 0.0,
           "sha256": "65a5ee09707037b0418c6b7e696e0688d97b3afcba70f34ba6128ea3fbe43b90",
           "shape": [
             33,
@@ -73,7 +73,7 @@
           "exact": true,
           "expected_longest": 41,
           "longest": 41,
-          "max_coordinate_difference_vox": 0,
+          "max_coordinate_difference_vox": 0.0,
           "sha256": "514bbd7a6601970f3f2278c57155e49915652ffa555e78af2a8641c6c3a07697",
           "shape": [
             33,
@@ -85,7 +85,7 @@
           "exact": true,
           "expected_longest": 6,
           "longest": 6,
-          "max_coordinate_difference_vox": 0,
+          "max_coordinate_difference_vox": 0.0,
           "sha256": "7d8162025dcfd662428fce8440eb8fc6da224e68a4af658c1d694e0acb75824d",
           "shape": [
             33,
@@ -105,7 +105,7 @@
           "exact": true,
           "expected_longest": 41,
           "longest": 41,
-          "max_coordinate_difference_vox": 0,
+          "max_coordinate_difference_vox": 0.0,
           "sha256": "5b48a8bb94eb2f6596a0cfef0f4e669a581fd5f998b6f46c815ea4b5c0b589dc",
           "shape": [
             33,
@@ -117,7 +117,7 @@
           "exact": true,
           "expected_longest": 28,
           "longest": 28,
-          "max_coordinate_difference_vox": 0,
+          "max_coordinate_difference_vox": 0.0,
           "sha256": "adb0fc6db7513d868a37b02de19be2aa7e0ece70683aaef829aa5a219f54de6c",
           "shape": [
             33,
@@ -137,7 +137,7 @@
           "exact": true,
           "expected_longest": 27,
           "longest": 27,
-          "max_coordinate_difference_vox": 0,
+          "max_coordinate_difference_vox": 0.0,
           "sha256": "7c51eb013789a674f4bf2c59e3eebca587b5b64dcfa76b722bbff2075cf745a3",
           "shape": [
             33,
@@ -149,7 +149,7 @@
           "exact": true,
           "expected_longest": 41,
           "longest": 41,
-          "max_coordinate_difference_vox": 0,
+          "max_coordinate_difference_vox": 0.0,
           "sha256": "42e4df23d2e1de3e865a1800eaac9915d987ba63f2e07c2f3829097baec0555a",
           "shape": [
             33,
@@ -168,12 +168,14 @@
   "exact_cases": 5,
   "native_calls": 25,
   "numpy": "1.26.4",
-  "python": "3.10.11",
+  "python": "3.10.11 (v3.10.11:7d4cc5aa85, Apr  4 2023, 19:05:19) [Clang 13.0.0 (clang-1300.0.29.30)]",
   "report_manifest_entries_verified": 127,
   "report_zip_sha256": "163db6f68129fe075340e2375f4cad263d368fb2940a51d624b843a9f5dd1a22",
   "runtime": {
+    "bind_mounts": [],
     "cli_sha256": "7449f2b1906a822074562e2ab3298534437e0dfbe826b28d38660c1199a29d37",
     "docker_image_id": "sha256:f6679bd8ff3bb444c0f4c28d27a0a28dcee63dbcca0cbf385b142f332ebe1f21",
+    "help_sha256": "60866b6f7b724e649dc0c6cf07ea5b302fbcd5b2d453cea99b1c8985ff07ea40",
     "mode": "DOCKER_AMD64_LOCAL_IMPORT_APPIMAGE",
     "network": "none"
   },

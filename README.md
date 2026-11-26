@@ -4,11 +4,18 @@ R103 adjusts a narrow surface strip after VC3D has extended it. If the mesh stra
 
 ## R094 · row-uniform correction
 
-R094 is the uniform CT-guided method already included in the submitted R103 code. On the follow-up panels it improves mean contiguous fibre proximity over VC3D on both PHerc. 172 and PHerc. 332. On PHerc. 332 it scores **21.04 vs 14.54 points (+44.7%)**, with improvement in all eight regional means; R103 scores 19.92. On the original Paris. 4 panel, R094 increased both target-sheet and other-sheet area. These results do not establish general superiority or improved ink legibility.
+R094 is the row-uniform CT-guided method already included in the submitted R103 code. The original comparison on PHerc. Paris. 4 is below. Follow-up tests on PHerc. 172 and PHerc. 332 (24 starts each) found that R094 improved mean contiguous fibre proximity over VC3D on both scrolls. On PHerc. 332 it reached **21.04 vs 14.54 points (+44.7%)**, with improvement in all eight regional means; R103 reached 19.92. R094 does not always win and increased mean other-sheet area on the original Paris. 4 panel.
 
-**Fresh replay (26 November 2026):** five selected illustrative cases regenerated bit-identical VC3D and R094 coordinates (10/10 outputs, 25 native extender calls); R103 was not rerun.
+![Regional means and all regional paired changes for R094 and R103 on two scrolls](r094/r094-benchmark.png)
 
-[Method, results, and reproduction](r094/README.md) · [All 48 paired scores](r094/paired-scores.csv) · [Replay evidence](r094/replay-verification.json)
+[Method, examples, provenance and reproducibility](r094/README.md) · [All 48 paired scores](r094/paired-scores.csv) · [Download the rotatable 3D mesh viewer](r094/r094-3d.html) (open the downloaded HTML locally).
+
+![Case 04: rotating original VC3D, R094 and R103 surface outputs at equal scale](r094/r094-rotation.gif)
+
+
+**Fresh replay (26 November 2026):** all five illustrative cases regenerated bit-identical VC3D and R094 coordinates using the original pinned VC3D build (10/10 meshes, 25 native calls). R103 was not rerun in this check. [Reproduction evidence](r094/replay-verification.json).
+
+This supplement documents the existing method and previously published follow-up results; it is not a new algorithm or a separate prize submission. The fibre metric is not a measurement of letter legibility or complete sheet identity. The supplement includes generated mesh outputs, not source CT voxels or original manual annotation traces. The shared starting strip is oriented using a short initial manual indication.
 
 ## Results on PHerc. Paris. 4
 

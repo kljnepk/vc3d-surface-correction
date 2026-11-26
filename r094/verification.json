@@ -1,0 +1,92 @@
+{
+  "manifests_verified": 84,
+  "visible_distances_recomputed": 5868,
+  "out_of_crop_entries": 36,
+  "max_distance_difference_vox": 3.552713678800501e-15,
+  "p01_sha256": "eaffae3e196aefd5a463e16075753ecb42e40bd6137c9c6fc69c19f9715f1e83",
+  "archives": {
+    "R115": "4f3444256991c5e4dd82d44e8c3fe445279e29ce90114a11848af0a8b4c64848",
+    "R116": "bce5c5ceefd7eacc46d6f5ebbc53b4a9031a2d243861cb8d175a5f8a61460e98"
+  },
+  "panels": {
+    "R115": {
+      "starts": 24,
+      "regions": 8,
+      "means": {
+        "VC3D": 14.416666666666666,
+        "R094": 20.25,
+        "R103": 20.666666666666668
+      },
+      "r094_better_region_count_vs_vc3d": 6,
+      "r094_vs_r103_w_t_l": [
+        11,
+        7,
+        6
+      ]
+    },
+    "R116": {
+      "starts": 24,
+      "regions": 8,
+      "means": {
+        "VC3D": 14.541666666666666,
+        "R094": 21.041666666666668,
+        "R103": 19.916666666666668
+      },
+      "r094_better_region_count_vs_vc3d": 8,
+      "r094_vs_r103_w_t_l": [
+        8,
+        9,
+        7
+      ]
+    }
+  },
+  "selected_cases": [
+    {
+      "id": "s5_05497_02497_02497_256_t2_n33",
+      "scores": {
+        "VC3D": 4,
+        "R094": 29,
+        "R103": 17
+      },
+      "identical_r094_r103": false
+    },
+    {
+      "id": "s5_05497_02497_02497_256_t4_n105",
+      "scores": {
+        "VC3D": 7,
+        "R094": 1,
+        "R103": 26
+      },
+      "identical_r094_r103": false
+    },
+    {
+      "id": "s3_00994_01994_00494_512_t43_n3959",
+      "scores": {
+        "VC3D": 6,
+        "R094": 41,
+        "R103": 41
+      },
+      "identical_r094_r103": true
+    },
+    {
+      "id": "s3_01994_01994_01494_512_t13_n529",
+      "scores": {
+        "VC3D": 28,
+        "R094": 41,
+        "R103": 23
+      },
+      "identical_r094_r103": false
+    },
+    {
+      "id": "s3_04494_00994_01494_512_t14_n834",
+      "scores": {
+        "VC3D": 41,
+        "R094": 27,
+        "R103": 15
+      },
+      "identical_r094_r103": false
+    }
+  ],
+  "status": "PASS_RECOMPUTED_48_STARTS_AND_5_CT_CROPS",
+  "note": "CT hash confirms frozen normalized crop, not independent fibre annotation or scroll layer identity."
+}
