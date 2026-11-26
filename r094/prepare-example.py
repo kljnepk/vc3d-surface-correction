@@ -45,12 +45,12 @@ def raw_tiff_crop(path, origin, side):
     z0,y0,x0=origin
     with path.open('rb') as f:
         def read_at(pos,n):
-            f.seek(pos); b=f.read(n); require(len(b)==n,'Ucięty TIFF'); return b
+            f.seek(pos); b=f.read(n); require(len(b)==n,'Truncated TIFF'); return b
         head=read_at(0,8); order={b'II':'<',b'MM':'>'}.get(head[:2])
-        require(order and struct.unpack_from(order+'H',head,2)[0]==42,'TIFF wymaga tifffile/Pillow')
+        require(order and struct.unpack_from(order+'H',head,2)[0]==42,'This TIFF requires tifffile or Pillow')
         pos=struct.unpack_from(order+'I',head,4)[0]; seen=set();frames=[]
         for index in range(side):
-            require(pos and pos not in seen,'Błędna lista klatek TIFF');seen.add(pos)
+            require(pos and pos not in seen,'Invalid TIFF page chain');seen.add(pos)
             count=struct.unpack(order+'H',read_at(pos,2))[0]; directory=read_at(pos+2,12*count+4)
             pos=struct.unpack_from(order+'I',directory,12*count)[0]
             if not z0<=index<z0+128: continue
@@ -58,17 +58,17 @@ def raw_tiff_crop(path, origin, side):
             for j in range(count):
                 off=j*12; tag,kind,n=struct.unpack_from(order+'HHI',directory,off)
                 if tag not in (256,257,258,259,262,273,277,279,339) or kind not in (3,4): continue
-                require(n<=65536,'Zbyt długa tabela TIFF'); width,code=(2,'H') if kind==3 else (4,'I');length=n*width
+                require(n<=65536,'TIFF tag table is too long'); width,code=(2,'H') if kind==3 else (4,'I');length=n*width
                 raw=directory[off+8:off+8+length] if length<=4 else read_at(struct.unpack_from(order+'I',directory,off+8)[0],length)
                 tags[tag]=struct.unpack(order+str(n)+code,raw)
-            require({256,257,258,273,279}.issubset(tags),'Brak opisu pasów TIFF')
-            require((tags[256][0],tags[257][0])==(side,side) and tags.get(259,(1,))[0]==1 and tags.get(277,(1,))[0]==1 and tags.get(339,(1,))[0]==1 and tags.get(262,(1,))[0]==1 and tags[258][0] in (8,16),'TIFF wymaga tifffile/Pillow')
+            require({256,257,258,273,279}.issubset(tags),'Missing TIFF strip metadata')
+            require((tags[256][0],tags[257][0])==(side,side) and tags.get(259,(1,))[0]==1 and tags.get(277,(1,))[0]==1 and tags.get(339,(1,))[0]==1 and tags.get(262,(1,))[0]==1 and tags[258][0] in (8,16),'This TIFF requires tifffile or Pillow')
             size=tags[258][0]//8
-            require(len(tags[273])==len(tags[279]) and sum(tags[279])==side*side*size,'Błędne paski TIFF')
+            require(len(tags[273])==len(tags[279]) and sum(tags[279])==side*side*size,'Invalid TIFF strips')
             raw=b''.join(read_at(s,n) for s,n in zip(tags[273],tags[279]))
             frame=np.frombuffer(raw,dtype=order+'u'+str(size)).reshape(side,side)
             frames.append(frame[y0:y0+128,x0:x0+128].copy())
-        require(not pos,'TIFF ma za dużo klatek')
+        require(not pos,'Too many TIFF pages')
     return np.stack(frames)
 
 def read_crop(path,origin,side):
@@ -81,16 +81,16 @@ def read_crop(path,origin,side):
             if len(t.pages)==side and t.pages[0].shape==(side,side):
                 arr=np.stack([t.pages[i].asarray()[ys,xs] for i in range(z0,z0+128)])
             else:
-                a=t.asarray();require(a.shape==(side,)*3,'Wymiary TIFF niezgodne');arr=a[z0:z0+128,ys,xs].copy()
-        require(arr.shape==(128,)*3 and arr.dtype.kind in 'bui','Błędny typ lub wymiary CT');return arr,'tifffile'
+                a=t.asarray();require(a.shape==(side,)*3,'Unexpected TIFF dimensions');arr=a[z0:z0+128,ys,xs].copy()
+        require(arr.shape==(128,)*3 and arr.dtype.kind in 'bui','Unexpected CT dtype or shape');return arr,'tifffile'
     except Exception as e: errors.append(str(e))
     try:
         from PIL import Image
         with Image.open(path) as im:
-            require(im.size==(side,side) and im.n_frames==side,'Wymiary TIFF niezgodne')
+            require(im.size==(side,side) and im.n_frames==side,'Unexpected TIFF dimensions')
             frames=[]
             for i in range(z0,z0+128): im.seek(i);frames.append(np.array(im.crop((x0,y0,x0+128,y0+128))))
-        arr=np.stack(frames);require(arr.shape==(128,)*3 and arr.dtype.kind in 'bui','Błędny typ lub wymiary CT');return arr,'Pillow'
+        arr=np.stack(frames);require(arr.shape==(128,)*3 and arr.dtype.kind in 'bui','Unexpected CT dtype or shape');return arr,'Pillow'
     except Exception as e: errors.append(str(e))
     try: return raw_tiff_crop(path,origin,side),'classic TIFF'
     except Exception as e: raise ValueError('Unable to read CT: '+' | '.join(errors+[str(e)])) from e

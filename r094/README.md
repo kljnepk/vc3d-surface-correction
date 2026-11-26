@@ -10,11 +10,11 @@
 | PHerc. 332 | 24 / 8 | 14.54 | 21.04 | 19.92 | +44.7% |
 | Both panels (equal weights) | 48 / 16 | 14.48 | 20.65 | 20.29 | +42.6% |
 
-Scores are the longest uninterrupted sequence of 41 reference stations (+10 through +50 voxels along the held-back manual continuation) at Euclidean distance ≤2 voxels from a triangle of the extended strip. A station outside the crop breaks the sequence for all methods. Means give each region equal weight; each region has three starts. The first eight voxels of manual trace supplied the direction of the common initial strip. No continuation or reference label is supplied to the correction at inference.
+The score is the longest uninterrupted run among 41 reference stations (+10 through +50 voxels along the held-back manual continuation) at Euclidean distance ≤2 voxels from a triangle of the extended strip. A station outside the crop breaks the sequence for all methods. Means give each region equal weight; each region has three starts. The first eight voxels of manual trace supplied the direction of the common initial strip. No continuation or reference label is supplied to the correction at inference.
 
 ![Mean results and regional changes](r094-benchmark.png)
 
-The R094 mean improves in 6/8 regions on PHerc. 172 and 8/8 on PHerc. 332. Across both panels R094 exceeds R103 at 19 starts, ties at 16 and loses at 13; the combined mean advantage is small (0.354 points, +1.7%). The panels are descriptive paired experiments, not independent evidence of statistical superiority. The original Paris. 4 experiment measured a different property: target-sheet area increased from 532.46 to 559.36 voxel² with R094, but mean other-sheet area increased from 0.89 to 1.89 voxel² (R103: 589.64 and 0.11 respectively). No general superiority claim is warranted.
+The R094 mean improves in 6/8 regions on PHerc. 172 and 8/8 on PHerc. 332. Across both panels R094 exceeds R103 at 19 starts, ties at 16 and loses at 13; the combined mean advantage is small (0.354 points, +1.7%). These paired comparisons do not establish statistically significant superiority. The original Paris. 4 experiment measured a different property: target-sheet area increased from 532.46 to 559.36 voxel² with R094, but mean other-sheet area increased from 0.89 to 1.89 voxel² (R103: 589.64 and 0.11 respectively).
 
 [Original published fibre benchmark](../r103-external-fibres.md) · [All 48 paired scores](paired-scores.csv) · [Verification record](verification.json)
 
@@ -32,7 +32,7 @@ The R094 mean improves in 6/8 regions on PHerc. 172 and 8/8 on PHerc. 332. Acros
 | 04 | 332 | 28 | 41 | 23 | R094 gain over both methods |
 | 05 | 332 | 41 | 27 | 15 | both corrections lose to VC3D |
 
-The five examples were selected after scoring to illustrate gains, losses and equality; do not treat them as a benchmark. In Case 03 R094 and R103 have identical coordinates. In Case 05 the baseline is better than both corrections. The geometry viewer alone cannot establish fibre visibility, absence of sheet switches, or ink legibility.
+The five examples were selected after scoring to illustrate gains, losses and equal outputs. In Case 03 R094 and R103 have identical coordinates. In Case 05 the baseline is better than both corrections. The geometry viewer alone cannot establish fibre visibility, absence of sheet switches, or ink legibility.
 
 ## Method and independent use
 
@@ -60,7 +60,7 @@ python3 -m r103.parents --ct example04/ct.zarr --seed example04/seed.tifxyz \
 python3 r094/prepare-example.py --case 04 --check-parents replay04
 ```
 
-The preparation script checks the source TIFF hash and normalized crop hash before writing the crop, shared seed and frozen outputs. The last command checks the generated baseline and R094 coordinate digests against the frozen meshes. An exact match depends on the original extender, platform and numerical environment. On 26 November 2026 the preparation and parent-builder commands were rerun for all five cases from verified source TIFFs (four distinct files), with Python 3.10.11, NumPy 1.26.4 and the original Linux x86-64 VC3D executable in an offline local Docker environment. All ten newly generated VC3D and R094 meshes matched the archived coordinates byte for byte (25 native calls; no reuse of saved extensions between replays). R103 was not rerun. See [the replay record](replay-verification.json) for exact coordinate hashes and scope. It is not a reproduction of the 48-start annotation protocol. The full paired-score table is already public, while recomputation of the original fibre distances was performed locally using the archived manual traces.
+The preparation script checks the source TIFF hash and normalized crop hash before writing the crop, shared seed and frozen outputs. The last command checks the generated baseline and R094 coordinate digests against the frozen meshes. An exact match depends on the original extender, platform and numerical environment. On 26 November 2026 the preparation and parent-builder commands were rerun for all five cases from verified source TIFFs (four distinct files), with Python 3.10.11, NumPy 1.26.4 and the original Linux x86-64 VC3D executable in an offline local Docker environment. All ten newly generated VC3D and R094 meshes matched the archived coordinates byte for byte (25 native calls; no reuse of saved extensions between replays). R103 was not rerun. See [the replay record](replay-verification.json) for exact coordinate hashes and scope. The full 48-start benchmark was not rerun. Its original fibre distances were recomputed locally using the archived manual traces.
 
 For local diagnostic images, install SciPy and Matplotlib in your own environment if needed, then run:
 
