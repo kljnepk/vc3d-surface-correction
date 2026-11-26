@@ -2,6 +2,14 @@
 
 R103 adjusts a narrow surface strip after VC3D has extended it. If the mesh strays onto a neighbouring sheet, any downstream ink detector can sample the wrong page. R103 uses the local CT signal and the original starting edge to choose a correction. It writes a standard `tifxyz` surface that can be reopened in VC3D.
 
+## R094 · row-uniform correction
+
+R094 is the uniform CT-guided method already included in the submitted R103 code. On the follow-up panels it improves mean contiguous fibre proximity over VC3D on both PHerc. 172 and PHerc. 332. On PHerc. 332 it scores **21.04 vs 14.54 points (+44.7%)**, with improvement in all eight regional means; R103 scores 19.92. On the original Paris. 4 panel, R094 increased both target-sheet and other-sheet area. These results do not establish general superiority or improved ink legibility.
+
+**Fresh replay (26 November 2026):** five selected illustrative cases regenerated bit-identical VC3D and R094 coordinates (10/10 outputs, 25 native extender calls); R103 was not rerun.
+
+[Method, results, and reproduction](r094/README.md) · [All 48 paired scores](r094/paired-scores.csv) · [Replay evidence](r094/replay-verification.json)
+
 ## Results on PHerc. Paris. 4
 
 The correction was fixed before testing in seven previously unused regions of this scroll. All three methods completed the same 28 starts, four in each region.
