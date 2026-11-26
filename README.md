@@ -10,7 +10,7 @@ R094 is the row-uniform CT-guided correction included in the submitted R103 code
 
 ![Regional means and all regional paired changes for R094 and R103 on two scrolls](r094/r094-benchmark.png)
 
-[Method, examples, provenance and reproducibility](r094/README.md) · [All 48 paired scores](r094/paired-scores.csv) · [Download the rotatable 3D mesh viewer](r094/r094-3d.html) (open the downloaded HTML locally).
+[Method, examples, provenance and reproducibility](r094/README.md) · [All 48 paired scores](r094/paired-scores.csv) · [Reproduce the 48 fibre comparisons](r094/README.md#reproduce-the-48-paired-fibre-scores) · [Download the rotatable 3D mesh viewer](r094/r094-3d.html) (open the downloaded HTML locally).
 
 ![Case 04: rotating original VC3D, R094 and R103 surface outputs at equal scale](r094/r094-rotation.gif)
 

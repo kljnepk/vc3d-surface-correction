@@ -1,6 +1,6 @@
 # R094 · row-uniform CT-guided correction
 
-**Supplement to R103, submitted to the November 2026 Progress Prizes on 21 November.** R094 was already in the original repository and is one of the candidates considered by R103. This page documents the method, the previously published follow-up benchmark, and a fresh replay of five selected cases. The replay is a reproducibility check, not a new benchmark or a separate prize submission.
+**Supplement to R103, submitted to the November 2026 Progress Prizes on 21 November.** R094 was already in the original repository and is one of the candidates considered by R103. This page documents the method, the previously published follow-up benchmark, and how to reproduce the scores for all 48 starts. Five selected cases also have a documented fresh run from CT. The five-case replay checks the original benchmark.
 
 ## Results
 
@@ -49,6 +49,26 @@ python3 -m r103.parents --ct crop.zarr --seed seed.tifxyz \
 
 Open `parents/R094.tifxyz` with the associated crop in VC3D, or use it in another compatible pipeline. This produces both VC3D and R094, without running `r103.correct`. See the original [reproduction instructions](../docs/REPRODUCE.md) for dependencies and binary SHA-256.
 
+## Reproduce the 48 paired fibre scores
+
+From the repository root, use Python 3.10, NumPy 1.26.4, Pillow for the source TIFFs, and the [benchmark VC3D executable or wrapper](../docs/REPRODUCE.md). To add the TIFF reader to the benchmark environment, run `python3 -m pip install Pillow==10.4.0`. The following command downloads missing files under the [official data terms](https://dl.ash2txt.org/LICENSE.txt).
+
+```sh
+python3 r094/replay-panel.py --data-dir fibre-data --download \
+  --extender /absolute/path/to/vc_extend_edge --out fibre-replay
+```
+
+The script obtains 16 CT volumes and their 16 fibre annotations from the official server (about 1.21 GiB altogether). To work offline, put the registered files in `fibre-data/imagesTr/` and `fibre-data/nml/` and omit `--download`. The [input register](fibre-panel.json) lists the URLs, SHA-256 digests, crop locations and common starting strips. Each strip has three rows of nine vertices. The two studies fixed these inputs before scoring.
+
+For each start, the script crops the CT, regenerates VC3D, R094 and R103, and checks their coordinates against the original digests. Once all 144 meshes pass, it reads the withheld continuation from the official fibre annotation and calculates the longest supported run. On success, the new output directory contains the 48 sets of regenerated meshes and `paired-scores.csv`. The script checks all 144 scores against the published table.
+
+**Verification to date.** We reran scoring for all 48 starts using the two original result archives. The resulting CSV matched the published table byte for byte across all 144 scores. The documented fresh native run from CT covers the five examples below. Researchers who already hold the original archives can repeat the scoring check without VC3D or any downloads:
+
+```sh
+python3 r094/replay-panel.py --archives /path/to/R115-result.zip /path/to/R116-result.zip \
+  --out fibre-rescore
+```
+
 ## Replay a real example locally
 
 [examples.json](examples.json) records the five case IDs, official input TIFF URLs and SHA-256, crop origins, frozen normalized crop hashes, scores and generated output coordinates. It contains no source CT voxels or held-back manual continuation coordinates. The generated starting strip itself is included in the output meshes; its orientation was derived from the initial short manual trace. The coordinates are stored as local Z,Y,X and round-trip to the original little-endian float32 bytes. Obtain the relevant input TIFF yourself from the official server under its terms. For Case 04 use the source URL in `examples.json` and save the file locally. With NumPy installed (tifffile is optional for the uncompressed source TIFFs):
@@ -60,7 +80,7 @@ python3 -m r103.parents --ct example04/ct.zarr --seed example04/seed.tifxyz \
 python3 r094/prepare-example.py --case 04 --check-parents replay04
 ```
 
-The preparation script checks the source TIFF hash and normalized crop hash before writing the crop, shared seed and frozen outputs. The last command checks the generated baseline and R094 coordinate digests against the frozen meshes. An exact match depends on the original extender, platform and numerical environment. On 26 November 2026 the preparation and parent-builder commands were rerun for all five cases from verified source TIFFs (four distinct files), with Python 3.10.11, NumPy 1.26.4 and the original Linux x86-64 VC3D executable in an offline local Docker environment. All ten newly generated VC3D and R094 meshes matched the archived coordinates byte for byte (25 native calls; no reuse of saved extensions between replays). R103 was not rerun. See [the replay record](replay-verification.json) for exact coordinate hashes and scope. The full 48-start benchmark was not rerun. Its original fibre distances were recomputed locally using the archived manual traces.
+The preparation script checks the source TIFF hash and normalized crop hash before writing the crop, shared seed and frozen outputs. The last command checks the generated baseline and R094 coordinate digests against the frozen meshes. An exact match depends on the original extender, platform and numerical environment. On 26 November 2026 the preparation and parent-builder commands were rerun for all five cases from verified source TIFFs (four distinct files), with Python 3.10.11, NumPy 1.26.4 and the original Linux x86-64 VC3D executable in an offline local Docker environment. All ten newly generated VC3D and R094 meshes matched the archived coordinates byte for byte (25 native calls; no reuse of saved extensions between replays). R103 was not rerun. See [the replay record](replay-verification.json) for exact coordinate hashes and scope. For the separate scoring check covering all 48 starts, see the instructions above.
 
 For local diagnostic images, install SciPy and Matplotlib in your own environment if needed, then run:
 
